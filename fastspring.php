@@ -261,6 +261,7 @@ class FsprgSubscription {
 	public $productName;
 	public $tags;
 	public $quantity;
+	public $nextPeriodDate;
 }
 
 class FsprgCustomer {
@@ -280,6 +281,7 @@ class FsprgSubscriptionUpdate {
 	public $coupon;
 	public $discountDuration;
 	public $proration;
+	public $nextPeriodDate;
 	
 	public function __construct($subscription_ref) {
 		$this->reference = $subscription_ref;
@@ -305,6 +307,9 @@ class FsprgSubscriptionUpdate {
 		}
 		if ($this->discountDuration) {
 			$xmlResult->addChild("discount-duration", $this->discountDuration);
+		}
+		if ($this->nextPeriodDate) {
+			$xmlResult->nextPeriodDate = strftime("%Y-%m-%d", $this->nextPeriodDate);
 		}
 		if (isset($this->proration)) {
 			if ($this->proration) {
